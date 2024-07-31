@@ -10,7 +10,6 @@ For the API documentation, types are taken from type hints, with docstrings bein
 There's an assumption that the root directory contains one Python package. There are more details on that in the GitHub and GitLab sections below.
 
 To include other manually generated documentation content, add it to the `__init__py` as a top level docstring, and include other Markdown files from there using reStructuredText's .. include::. There's an example in the `__init__.py` in this project.
-```
 
 
 # GitHub CI/CD
