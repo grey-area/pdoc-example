@@ -2,33 +2,29 @@ stages:
   - build
   - deploy
 
-cache:
-  paths:
-    - venv/
-
-before_script:
-  # Check if Python is installed, if not, install it
-  - apt-get update && apt-get install -y python3 python3-venv python3-pip;
-  - python3 -m venv venv
-  - source venv/bin/activate
-  - pip install --upgrade pip
-  - pip install pdoc
-
 build-docs:
   stage: build
   script:
-    # Generate the documentation for the package in the root directory
-    # (we don't need to know the package name).
-    - pdoc $(find . -type f -name "__init__.py" -exec dirname {} \; | head -n 1) -o docs/
+    # Build the Docker image
+    - docker build -t documentation-image ./gitlab-ci-docs
+    # Run the Docker container to generate the documentation
+    - docker run --name documentation-container documentation-image
+    # Copy the generated docs from the container to the host
+    - docker cp my-docs-container:/usr/src/app/docs ./docs
   artifacts:
     paths:
       - docs/
   tags:
     - linux
+    - docker
   interruptible: true
   # For tagged releases, use "- tags" instead
   only:
     - master
+
+cache:
+  paths:
+    - venv/
 
 pages:
   stage: deploy
