@@ -1,5 +1,3 @@
-image: python:3.9
-
 stages:
   - build
   - deploy
@@ -9,24 +7,26 @@ cache:
     - venv/
 
 before_script:
-  - which python
-  - which python3
-  - python -m venv venv
+  # Check if Python is installed, if not, install it
+  - if ! which python3; then
+      sudo apt-get update && sudo apt-get install -y python3 python3-venv python3-pip;
+    fi
+  - python3 -m venv venv
   - source venv/bin/activate
+  - pip install --upgrade pip
   - pip install pdoc
 
 build-docs:
   stage: build
-  # The following command generates the documentation for the package in the root directory
-  # (we don't need to know the package name).
   script:
+    # Generate the documentation for the package in the root directory
+    # (we don't need to know the package name).
     - pdoc $(find . -type f -name "__init__.py" -exec dirname {} \; | head -n 1) -o docs/
   artifacts:
     paths:
       - docs/
   tags:
     - linux
-    - docker
   interruptible: true
   # For tagged releases, use "- tags" instead
   only:
@@ -42,7 +42,6 @@ pages:
       - public
   tags:
     - linux
-    - docker
   interruptible: true
   # For tagged releases, use "- tags" instead
   only:
