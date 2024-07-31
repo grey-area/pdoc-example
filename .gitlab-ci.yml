@@ -5,12 +5,11 @@ stages:
 build-docs:
   stage: build
   script:
-    # Build the Docker image
     - docker build -t documentation-image ./gitlab-ci-docs
-    # Run the Docker container to generate the documentation
+    # Generate the documentation in a container
     - docker run --name documentation-container documentation-image
     # Copy the generated docs from the container to the host
-    - docker cp my-docs-container:/usr/src/app/docs ./docs
+    - docker cp documentation-container:/usr/src/app/docs ./docs
   artifacts:
     paths:
       - docs/
