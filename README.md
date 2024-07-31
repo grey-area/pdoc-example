@@ -1,16 +1,19 @@
-This is an example repository of a Python package with CI/CD to build and deploy pdoc API documentation and additional manually provided documentation for both [GitHub](#GitHub) and [GitLab](#GitLab).
+This is an example repository of a Python package with CI/CD to build and deploy pdoc API documentation and additional manually provided documentation for both GitHub and GitLab.
+
+
+# Pdoc and Its Use in This Example.
 
 The [pdoc documentation is here](https://pdoc.dev/docs/pdoc.html).
 
 For the API documentation, types are taken from type hints, with docstrings being used for descriptive documentation.
 
-There's an assumption that the root directory contains one Python package. There are more details on that in the [GitHub](#GitHub) and [GitLab](#GitLab) sections below.
+There's an assumption that the root directory contains one Python package. There are more details on that in the GitHub and GitLab sections below.
 
 To include other manually generated documentation content, add it to the `__init__py` as a top level docstring, and include other Markdown files from there using reStructuredText's .. include::. There's an example in the `__init__.py` in this project.
 ```
 
 
-# GitHub
+# GitHub CI/CD
 
 The following files are specific to GitHub CI/CD: `./.github/workflows/docs.yml`.
 
@@ -22,7 +25,7 @@ Note the pdoc command in there looks for a package under the root directory (a d
 
 The resulting GitHub Pages URL is `https://<user or group>.github.io/<project name>/`.
 
-# GitLab
+# GitLab CI/CD
 
 The following files are specific to GitLab CI/CD: `./.gitlab-ci.yml, ./Dockerfile.pdoc-gitlab-ci`.
 
