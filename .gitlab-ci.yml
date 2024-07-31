@@ -8,7 +8,7 @@ cache:
 
 before_script:
   # Check if Python is installed, if not, install it
-  - sudo apt-get update && sudo apt-get install -y python3 python3-venv python3-pip;
+  - apt-get update && apt-get install -y python3 python3-venv python3-pip;
   - python3 -m venv venv
   - source venv/bin/activate
   - pip install --upgrade pip
