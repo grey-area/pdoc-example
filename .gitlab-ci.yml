@@ -22,6 +22,10 @@ build-docs:
   artifacts:
     paths:
       - docs/
+  tags:
+    - linux
+    - docker
+  interruptible: true
   # For tagged releases, use "- tags" instead
   only:
     - master
@@ -34,6 +38,10 @@ pages:
   artifacts:
     paths:
       - public
+  tags:
+    - linux
+    - docker
+  interruptible: true
   # For tagged releases, use "- tags" instead
   only:
     - master
