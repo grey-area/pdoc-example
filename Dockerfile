@@ -11,9 +11,6 @@ COPY . /usr/src/app
 RUN pip install --upgrade pip && \
     pip install pdoc
 
-# Define environment variable
-ENV PATH="/usr/src/app/venv/bin:$PATH"
-
 # The following command generates the documentation for the package in the root directory
 # (we don't need to know the package name).
 CMD pdoc $(find . -type f -name "__init__.py" -exec dirname {} \; | head -n 1) -o docs/

@@ -22,10 +22,6 @@ build-docs:
   only:
     - master
 
-cache:
-  paths:
-    - venv/
-
 pages:
   stage: deploy
   script:
