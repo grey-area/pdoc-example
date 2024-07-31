@@ -8,9 +8,7 @@ WORKDIR /usr/src/app
 COPY . /usr/src/app
 
 # Install any needed packages specified in requirements.txt
-RUN python -m venv venv && \
-    . venv/bin/activate && \
-    pip install --upgrade pip && \
+RUN pip install --upgrade pip && \
     pip install pdoc
 
 # Define environment variable
